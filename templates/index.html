@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIFx</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body class="container">
+    <div class="jumbotron">
+        <h1 class="text-center">GIFx</h1>
+        <hr />
+        <form method="POST" enctype='multipart/form-data'>
+
+            <label for="images" class="text-left">Select images (same sizes work best):</label>
+            <input class="form-control" type="file" name="images" multiple />
+            <br>
+            <div class="text-right">
+                <button class="btn btn-primary" type="submit">Submit Images</button>
+            </div>
+        </form>
+        <br>
+
+        <br>
+        <hr><br>
+        <table class="table table-striped">
+            <tr class="thead thead-dark">
+                <th>Frame Order</th>
+                <th>File Name</th>
+                <th>Format</th>
+                <th>Dimensions</th>
+                <th>Thumbnail</th>
+            </tr>
+            {% if images|length < 1 %}
+
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>No Images uploaded</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+          
+            {% endif %}
+            <form action="/reorder" method="POST">
+                {% for i in images %}
+                <tr>
+                    <td><input value="{{images.index(i)}}" class="form-control" name="rank" /></td>
+                    <td>{{i[1]}}</td>
+                    <td>{{i[0]}}</td>
+                    <td>{{sizes[images.index(i)]}}</td>
+                    <td><img style="max-height: 75px !important;" src={{i[2]}} /></td>
+
+
+                </tr>
+                {% endfor %}
+                
+                <tr class="table-active">
+                    <td colspan="2"></td>
+                    <td>
+                        <input class="form-control" type="number"  name="fps"
+                            placeholder="Frame duration: 200ms" /><br></td>
+                    <td>
+
+                        <input class="btn btn-warning" type="submit" value="Make GIF" />
+
+                    </td>
+                    <td>
+                        <button class="btn btn-danger"><a href="{{url_for('index')}}" style="text-decoration: none !important; color:white !important;">Reset</a></button>
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
+</body>
+
+</html>
