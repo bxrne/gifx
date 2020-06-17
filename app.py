@@ -12,6 +12,13 @@ final = []
 frames = []
 sizes = []
 
+def done():
+    images = []
+    imageObjects = []
+    final = []
+    frames = []
+    sizes = []
+
 def formImage(string):
     image_b64 = string.split(",")[1]
     binary = base64.b64decode(image_b64)
@@ -68,6 +75,7 @@ def index():
                 frames.append(img)
         return render_template("index.html", images=images, sizes=sizes)
     else:
+        done()
         return render_template("index.html")
 
 @app.route("/reorder", methods=["GET", "POST"])
