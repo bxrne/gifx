@@ -93,7 +93,7 @@ def reorder():
             newFrames.append(res[int(i)])
         del newFrames[:2]
 
-        newFrames[0].save("result.gif", format='GIF', append_images=newFrames[1:], save_all=True, duration=df, loop=0)
+        newFrames[0].save("result.gif", format='GIF', append_images=newFrames[1:], save_all=True, duration=200, loop=0)
         return send_file("result.gif", as_attachment=True)
     else:
         return redirect("/")

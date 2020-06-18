@@ -34,7 +34,7 @@
                 <th>Dimensions</th>
                 <th>Thumbnail</th>
             </tr>
-            {% if images|length < 1 %}
+            {% if imgs|length < 1 %}
 
             <tr>
                 <td>...</td>
@@ -42,20 +42,21 @@
                 <td>No Images uploaded</td>
                 <td>...</td>
                 <td>...</td>
+
             </tr>
           
             {% endif %}
-            <form action="/reorder" method="POST">
-                {% for i in images %}
+            <form action="/make" method="POST">
+                {% for i in imgs %}
+
                 <tr>
-                    <td><input value="{{images.index(i)}}" class="form-control" name="rank" /></td>
-                    <td>{{i[1]}}</td>
-                    <td>{{i[0]}}</td>
-                    <td>{{sizes[images.index(i)]}}</td>
-                    <td><img style="max-height: 75px !important;" src={{i[2]}} /></td>
-
-
+                    <td><input value="{{imgs.index(i)}}" class="form-control" name="rank" /></td>
+                    <td>{{i.filename}}</td>
+                    <td>{{i.type}}</td>
+                    <td>{{i.dimensions}}</td>
+                    <td><img style="max-height: 75px !important;" src={{i.uri}} /></td>
                 </tr>
+                
                 {% endfor %}
                 
                 <tr class="table-active">
