@@ -25,7 +25,7 @@ numpy==1.18.5
 opencv-python==4.2.0.34
 packaging==20.3
 pep517==0.8.2
-Pillow==7.1.2
+Pillow==9.0.1
 progress==1.5
 pyparsing==2.4.6
 pytoml==0.1.21
